@@ -36,8 +36,6 @@ java -cp out BudgetApp
 java -ea -cp out BudgetManagerTest
 ⚠️ Flaga -ea włącza asercje (assert) – bez niej testy nie zadziałają.
 
-🧪 Testy manualne
-
 ## 🧪 Testy manualne
 
 Pełny zestaw przypadków testowych dla **Etapu 1.1** dostępny jest w katalogu:
