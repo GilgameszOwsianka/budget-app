@@ -1,0 +1,30 @@
+# =========================
+# Java
+# =========================
+*.class
+*.log
+
+# =========================
+# IDE (IntelliJ / Eclipse / VSCode)
+# =========================
+# IntelliJ IDEA
+.idea/
+*.iml
+out/
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# VS Code
+.vscode/
+
+# =========================
+# OS (systemowe)
+# =========================
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
