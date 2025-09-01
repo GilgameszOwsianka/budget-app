@@ -43,6 +43,9 @@ Pełny zestaw przypadków testowych dla **Etapu 1.1** dostępny jest w katalogu:
 - [📄 CSV](docs/manual-tests/budget_app_manual_tests_etap_1_1.csv) – do Excela / Google Sheets  
 - [📝 Markdown](docs/manual-tests/budget_app_manual_tests_etap_1_1.md) – czytelna tabela na GitHubie
 
-ℹ️ Uwaga
+ℹ️ Uwaga:
+Walidacja kwoty została rozszerzona – aplikacja sprawdza:
+-> dodatnią wartość,
+-> maksymalnie 2 miejsca po przecinku,
+-> akceptuje przecinek lub kropkę jako separator dziesiętny.
 Brak walidacji kategorii i typu transakcji jest świadomym ograniczeniem Etapu 1.1.
-Walidacje zostaną dodane w Etapie 1.2e.
