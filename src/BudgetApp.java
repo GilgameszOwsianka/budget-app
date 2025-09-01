@@ -20,30 +20,34 @@ public class BudgetApp {
             try {
                 switch (choice) {
                     case 1:
-                        double amount = 0;
+                        double amount = -1;
                         while (true) {
+                            System.out.print("Kwota: ");
+                            String input = scanner.nextLine();
                             try {
-                                System.out.print("Kwota: ");
-                                amount = Double.parseDouble(scanner.nextLine());
+                                amount = Double.parseDouble(input);
                                 if (amount <= 0) {
-                                    System.out.println("❌ Kwota musi być większa od 0. Spróbuj ponownie.");
+                                    System.out.println("Kwota musi być większa od 0. Spróbuj ponownie.");
                                     continue;
                                 }
-                                break; // poprawna kwota -> wychodzimy z pętli
+                                break; // poprawna kwota
                             } catch (NumberFormatException e) {
-                                System.out.println("❌ Niepoprawny format liczby. Spróbuj ponownie.");
+                                System.out.println("Niepoprawny format kwoty. Wpisz liczbę, np. 123.45");
                             }
                         }
 
                         System.out.print("Kategoria: ");
                         String category = scanner.nextLine();
+
                         System.out.print("Data (YYYY-MM-DD): ");
                         LocalDate date = LocalDate.parse(scanner.nextLine());
+
                         System.out.print("Typ (income/expense): ");
                         String type = scanner.nextLine();
-                        manager.setTransaction(new Transaction(amount, category, date, type));
-                        break;
 
+                        manager.setTransaction(new Transaction(amount, category, date, type));
+                        System.out.println("✅ Transakcja została dodana.");
+                        break;
                     case 2:
                         if (manager.getTransaction() != null) {
                             System.out.println(manager.getTransaction());
@@ -51,21 +55,17 @@ public class BudgetApp {
                             System.out.println("Brak transakcji.");
                         }
                         break;
-
                     case 3:
                         manager.saveToFile(file);
                         System.out.println("Zapisano do pliku.");
                         break;
-
                     case 4:
                         manager.loadFromFile(file);
                         System.out.println("Wczytano z pliku.");
                         break;
-
                     case 5:
                         System.out.println("Koniec programu.");
                         return;
-
                     default:
                         System.out.println("Niepoprawna opcja.");
                 }
