@@ -38,23 +38,63 @@ Pełny zestaw przypadków testowych dla Etapu 1.1 dostępny jest w katalogu:
 
     📝 Markdown – czytelna tabela na GitHubie
 
-⚠️ Uwaga dotycząca walidacji danych
+⚠️ Walidacja danych i obsługa wyjątków
 
-Na tym etapie program sprawdza poprawność tylko kwoty transakcji.
-Przy niepoprawnej kwocie użytkownik otrzyma komunikat z informacją o prawidłowym formacie.
+Na tym etapie program sprawdza poprawność danych w interfejsie użytkownika (konsoli):
 
-Walidacja kwoty obejmuje:
+Kwota 
 
-    Kwota musi być liczbą dodatnią
+- musi być liczbą dodatnią, większą od 0
 
-    Maksymalnie 2 miejsca po przecinku
+- maksymalnie 2 miejsca po przecinku
 
-    Akceptowany separator dziesiętny: kropka lub przecinek
+- akceptowany separator dziesiętny: kropka . lub przecinek ,
 
-Brak walidacji kategorii i typu transakcji (income/expense) jest świadomym ograniczeniem Etapu 1.1.
-Walidacja daty i typu transakcji zostanie dodana w kolejnych etapach.
-ℹ️ Uwagi dodatkowe
+- przy niepoprawnej kwocie aplikacja wyświetla komunikat np.:
+Niepoprawny format kwoty. Poprawny format np. 123.45 lub 123,45
+Kwota musi być większa od 0.
+Kwota może mieć maksymalnie 2 miejsca po przecinku.
 
-    Przy wprowadzaniu niepoprawnych danych (np. kwota ≤ 0 lub niepoprawny format liczby) aplikacja wyświetla przyjazny komunikat i pozwala ponowić próbę.
+Data
 
-    Wszystkie operacje są potwierdzane komunikatem w konsoli (np. "Transakcja została ustawiona", "Zapisano do pliku").
+- format: YYYY-MM-DD
+
+- nie może być w przyszłości
+
+- przy błędnym formacie lub przyszłej dacie komunikat:
+Niepoprawny format daty. Użyj YYYY-MM-DD, np. 2025-01-01
+Data nie może być w przyszłości.
+
+Typ transakcji
+
+- tylko "income" lub "expense"
+
+- przy błędzie komunikat:
+Niepoprawny typ. Wpisz 'income' lub 'expense'.
+
+Dodatkowe uwagi
+
+Wszystkie operacje (ustawienie transakcji, zapis, odczyt) są potwierdzane komunikatem w konsoli:
+Transakcja została ustawiona
+Zapisano do pliku
+Wczytano z pliku
+
+- Program nie kończy się błędem przy niepoprawnym wprowadzeniu danych – użytkownik ma możliwość poprawienia wartości.
+
+🧪 Testy automatyczne (BudgetManagerTest.java)
+
+Testy obejmują:
+
+1. Ustawienie poprawnej transakcji
+
+2. Zapis i odczyt z pliku
+
+3. Walidacja kwoty (ujemna, 0, max. 2 miejsca po przecinku, przecinek/kropka)
+
+4. Zapis bez ustawionej transakcji (powinien rzucić IllegalStateException)
+
+5. Parsowanie daty (poprawna i niepoprawna, np. miesiąc > 12)
+
+6. Parsowanie kwoty z przecinkiem i kropką
+
+⚠️ Walidacja daty i typu transakcji odbywa się tylko w BudgetApp, nie w klasie Transaction.

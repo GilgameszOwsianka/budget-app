@@ -56,6 +56,10 @@ public class BudgetApp {
                             System.out.print("Data (YYYY-MM-DD): ");
                             try {
                                 date = LocalDate.parse(scanner.nextLine());
+                                if (date.isAfter(LocalDate.now())) {
+                                    System.out.println("Data nie może być w przyszłości.");
+                                    continue;
+                                }
                                 break;
                             } catch (DateTimeParseException ex) {
                                 System.out.println("Niepoprawny format daty. Użyj YYYY-MM-DD, np. 2025-01-01");

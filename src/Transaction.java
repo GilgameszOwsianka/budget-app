@@ -8,9 +8,11 @@ public class Transaction implements Serializable {
     private String type;
 
     public Transaction(double amount, String category, LocalDate date, String type) {
-        if (amount <= 0){
+        // Walidacja kwoty
+        if (amount <= 0) {
             throw new IllegalArgumentException("Amount must be greater than 0");
         }
+
         this.amount = amount;
         this.category = category;
         this.date = date;
@@ -33,6 +35,7 @@ public class Transaction implements Serializable {
         return type;
     }
 
+    @Override
     public String toString() {
         return type + ": " + amount + " , kategoria: " + category + ", data: " + date;
     }
