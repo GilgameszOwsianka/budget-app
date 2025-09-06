@@ -27,30 +27,33 @@ public class BudgetApp {
             try {
                 switch (choice) {
                     case 1:
+                        // --- Kwota ---
                         double amount = 0;
                         while (true) {
                             System.out.print("Kwota: ");
-                            String amountInput = scanner.nextLine().trim().replace(",", ".");
+                            String input = scanner.nextLine().trim().replace(",", ".");
                             try {
-                                amount = Double.parseDouble(amountInput);
+                                amount = Double.parseDouble(input);
                                 if (amount <= 0) {
                                     System.out.println("Kwota musi być większa od 0.");
                                     continue;
                                 }
-                                String[] parts = amountInput.split("\\.");
+                                String[] parts = input.split("\\.");
                                 if (parts.length == 2 && parts[1].length() > 2) {
                                     System.out.println("Kwota może mieć maksymalnie 2 miejsca po przecinku.");
                                     continue;
                                 }
-                                break; // poprawna kwota
+                                break;
                             } catch (NumberFormatException ex) {
                                 System.out.println("Niepoprawny format kwoty. Poprawny format np. 123.45 lub 123,45");
                             }
                         }
 
+                        // --- Kategoria ---
                         System.out.print("Kategoria: ");
                         String category = scanner.nextLine();
 
+                        // --- Data ---
                         LocalDate date;
                         while (true) {
                             System.out.print("Data (YYYY-MM-DD): ");
@@ -66,6 +69,7 @@ public class BudgetApp {
                             }
                         }
 
+                        // --- Typ ---
                         String type;
                         while (true) {
                             System.out.print("Typ (income/expense): ");
