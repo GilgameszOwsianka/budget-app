@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.io.File;
 import java.io.IOException;
 
 public class BudgetManagerTest {
@@ -15,10 +16,12 @@ public class BudgetManagerTest {
 
         // Test 2: Zapis i odczyt pliku
         try {
-            manager.saveToFile("transaction.txt");
+            String fileName = manager.saveToFile(); // metoda zwraca pełną nazwę pliku
+            File file = new File(fileName);
+            assert file.exists() : "Test 2 nie przeszedł! Plik nie został utworzony.";
 
             BudgetManager manager2 = new BudgetManager();
-            manager2.loadFromFile("transaction.txt");
+            manager2.loadFromFile(fileName);
 
             Transaction t2 = manager2.getTransaction();
             assert t2 != null : "Test 2 nie przeszedł!";
@@ -43,7 +46,7 @@ public class BudgetManagerTest {
         // Test 4: Zapis bez ustawionej transakcji
         try {
             BudgetManager emptyManager = new BudgetManager();
-            emptyManager.saveToFile("empty_transaction.txt");
+            emptyManager.saveToFile(); // powinien rzucić IllegalStateException
             assert false : "Test 4 nie przeszedł! - zapis pustej transakcji powinien rzucić wyjątek.";
         } catch (IllegalStateException ignored) {
             // poprawnie wykryto brak transakcji
