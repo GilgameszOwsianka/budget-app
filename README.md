@@ -11,7 +11,7 @@ src/
     BudgetManager.java
     BudgetApp.java
     BudgetManagerTest.java   # proste testy automatyczne (assert)
-transaction.txt              # plik danych (tworzony przy zapisie)
+transaction_YYYYMMDD_HHmmss.txt   # pliki danych (tworzone przy zapisie, wersjonowane)
 docs/manual-tests/
     budget_app_manual_tests_etap_1_1.csv
     budget_app_manual_tests_etap_1_1.md
@@ -57,20 +57,20 @@ Typ transakcji
 - tylko "income" lub "expense"
 - przy błędzie komunikat: Niepoprawny typ. Wpisz 'income' lub 'expense'.
 
-Dodatkowe uwagi
-Wszystkie operacje (ustawienie transakcji, zapis, odczyt) są potwierdzane komunikatem w konsoli:
-    Transakcja została ustawiona
-    Zapisano do pliku
-    Wczytano z pliku
-Program nie kończy się błędem przy niepoprawnym wprowadzeniu danych – użytkownik ma możliwość poprawienia wartości.
+🔔 Logowanie akcji
+Wszystkie operacje są potwierdzane komunikatem w konsoli:
+Transakcja została ustawiona
+Zapisano do pliku: transaction_20250906_120000.txt
+Wczytano z pliku: transaction_20250906_120000.txt
 
 🧪 Testy automatyczne (BudgetManagerTest.java)
 Testy obejmują:
-1. Ustawienie poprawnej transakcji
-2. Zapis i odczyt z pliku
-3. Walidacja kwoty (ujemna, 0, max. 2 miejsca po przecinku, przecinek/kropka)
-4. Zapis bez ustawionej transakcji (powinien rzucić IllegalStateException)
-5. Parsowanie daty (poprawna i niepoprawna, np. miesiąc > 12)
-6. Parsowanie kwoty z przecinkiem i kropką
+1.Ustawienie poprawnej transakcji
+2.Zapis i odczyt z pliku
+3.Walidacja kwoty (ujemna, 0)
+4.Zapis bez ustawionej transakcji (IllegalStateException)
+5.Parsowanie daty (poprawna i niepoprawna, np. miesiąc > 12)
+6.Parsowanie kwoty (przecinek i kropka)
+7.Data w przyszłości – Transaction akceptuje, ale BudgetApp w UI odrzuca
 
 ⚠️ Walidacja daty i typu transakcji odbywa się tylko w BudgetApp, nie w klasie Transaction.
